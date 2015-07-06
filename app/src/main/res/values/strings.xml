@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">MovieSelector</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+    <string name="Login">Login</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Register">Register</string>
+    <string name="FirstName">First Name</string>
+    <string name="LastName">Last Name</string>
+    <string name="Email">Email</string>
+    <string name="Major">Major</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_register">Register</string>
+    <string name="Logout">Logout</string>
+    <string name="title_activity_welcome">welcome</string>
+    <string name="title_activity_profile">Profile</string>
+    <string name="Back">Back</string>
+    <string name="MyProfile">MyProfile</string>
+    <string name="SearchMovie">Search Movie</string>
+    <string name="title_activity_seach">Seach</string>
+    <string name="MovieSelector">Movie Selector</string>
+    <string name="Search">Search</string>
+    <string-array name="major_names">
+        <item>CS</item>
+        <item>BME</item>
+        <item>ME</item>
+        <item>CompE</item>
+        <item>CM</item>
+        <item>EA</item>
+        <item>EE</item>
+    </string-array>
+    <string-array name="kind">
+        <item>New DVD</item>
+        <item>In Thearters</item>
+    </string-array>
+</resources>
