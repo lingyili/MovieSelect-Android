@@ -1,12 +1,12 @@
 package com.example.lingyi.Fromtomato;
 
 //import javax.annotation.Generated;
-//import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.Expose;
 
 //@Generated("org.jsonschema2pojo")
 public class AlternateIds {
 
-//    @Expose
+    @Expose
     private String imdb;
 
     /**

@@ -1,18 +1,19 @@
-package com.example.lingyi.Fromtomato;//import javax.annotation.Generated;
-//import com.google.gson.annotations.Expose;
+package com.example.lingyi.Fromtomato;
+//import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
 
 //@Generated("org.jsonschema2pojo")
 public class Links {
 
-//    @Expose
+    @Expose
     private String self;
-//    @Expose
+    @Expose
     private String alternate;
-//    @Expose
+    @Expose
     private String cast;
-//    @Expose
+    @Expose
     private String reviews;
-//    @Expose
+    @Expose
     private String similar;
 
     /**

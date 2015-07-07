@@ -1,6 +1,5 @@
 package com.example.lingyi.Fromtomato;
 
-import com.example.lingyi.Fromtomato.Movie;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

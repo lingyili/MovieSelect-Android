@@ -23,6 +23,7 @@
     <string name="title_activity_seach">Seach</string>
     <string name="MovieSelector">Movie Selector</string>
     <string name="Search">Search</string>
+    <string name="movieName">movieName</string>
     <string-array name="major_names">
         <item>CS</item>
         <item>BME</item>

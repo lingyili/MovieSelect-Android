@@ -1,4 +1,5 @@
-package com.example.lingyi.Fromtomato;//import com.google.gson.annotations.Expose;
+package com.example.lingyi.Fromtomato;
+import com.google.gson.annotations.Expose;
 //
 //import javax.annotation.Generated;
 import java.util.ArrayList;
@@ -7,11 +8,11 @@ import java.util.List;
 //@Generated("org.jsonschema2pojo")
 public class AbridgedCast {
 
-//    @Expose
+    @Expose
     private String name;
-//    @Expose
+    @Expose
     private String id;
-//    @Expose
+    @Expose
     private List<String> characters = new ArrayList<String>();
 
     /**
