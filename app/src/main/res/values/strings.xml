@@ -34,7 +34,10 @@
         <item>EE</item>
     </string-array>
     <string-array name="kind">
+        <item>Select</item>
         <item>New DVD</item>
         <item>In Thearters</item>
     </string-array>
+    <string name="title_activity_rating">Rating</string>
+    <string name="Comment">Comments</string>
 </resources>

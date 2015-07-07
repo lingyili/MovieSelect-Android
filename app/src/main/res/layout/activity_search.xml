@@ -11,7 +11,7 @@
     android:orientation="horizontal"
     android:id="@+id/linearLayout">
     <EditText
-        android:layout_width="183dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:id="@+id/eText"
         android:inputType="text"
@@ -33,34 +33,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="50dp">
-    <!--<ImageView-->
-        <!--android:id="@+id/imageView"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/linearLayout"-->
-        <!--android:layout_alignParentStart="false"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:maxHeight="80dp"-->
-        <!--android:maxWidth="80dp"-->
-        <!--android:src = ""-->
-        <!--android:adjustViewBounds="true" />-->
-    <!--<TextView-->
-        <!--android:id = "@+id/txtMovieName"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginRight="@+id/imageView"-->
-        <!--android:text = "movie Name here" />-->
-
-</LinearLayout>
     <ListView
         android:id="@+id/mListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:layout_marginTop="50dp"
         android:cacheColorHint="@android:color/transparent"
         android:divider="@android:color/white"
         android:dividerHeight="2dp" >
     </ListView>
+</LinearLayout>
 </RelativeLayout>
 

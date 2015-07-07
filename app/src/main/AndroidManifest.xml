@@ -52,6 +52,10 @@
             android:name=".Search"
             android:label="@string/title_activity_seach" >
         </activity>
+        <activity
+            android:name=".Rating"
+            android:label="@string/title_activity_rating" >
+        </activity>
     </application>
 
 </manifest>

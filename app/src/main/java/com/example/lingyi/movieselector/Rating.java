@@ -34,6 +34,7 @@ public class Rating extends ActionBarActivity {
         setContentView(R.layout.activity_rating);
         setCurrentMovie();
         new TryToShowImage().execute();
+
     }
 
    public void setCurrentMovie() {
@@ -79,6 +80,7 @@ public class Rating extends ActionBarActivity {
     }
 
     private void showItem() {
+
         ImageView itemView = (ImageView)findViewById(R.id.image);
         itemView.setImageBitmap(movie.getBitmap());
         TextView makeText = (TextView)findViewById(R.id.movieName);
