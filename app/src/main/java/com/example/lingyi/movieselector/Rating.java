@@ -4,12 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,7 +16,7 @@ import com.example.lingyi.Fromtomato.Movie;
 import com.example.lingyi.Fromtomato.RestBean;
 
 
-public class Rating extends ActionBarActivity {
+public class Rating extends FragmentActivity {
     Movie passInMovie;
     Button btnSubmit;
     ImageView imageView;
@@ -80,11 +77,12 @@ public class Rating extends ActionBarActivity {
     }
 
     private void showItem() {
-
         ImageView itemView = (ImageView)findViewById(R.id.image);
         itemView.setImageBitmap(movie.getBitmap());
         TextView makeText = (TextView)findViewById(R.id.movieName);
         makeText.setText(movie.getTitle());
+        TextView synopsis = (TextView) findViewById(R.id.synopsis);
+        synopsis.setText(movie.getSynopsis());
     }
 
 

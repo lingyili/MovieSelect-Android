@@ -135,6 +135,7 @@ public class RestBean {
             BufferedReader br = new BufferedReader(isr);
             Gson gson = new Gson();
             movie = gson.fromJson(br, Movie.class);
+            movie.setBitmap(getBitmapFromURL(movie.getPosters().getOriginal()));
         } catch (MalformedURLException m) {
             m.getMessage();
         } catch (IOException e) {

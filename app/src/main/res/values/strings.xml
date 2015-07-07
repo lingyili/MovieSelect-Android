@@ -40,4 +40,5 @@
     </string-array>
     <string name="title_activity_rating">Rating</string>
     <string name="Comment">Comments</string>
+    <string name="Synopsis">Synopsis</string>
 </resources>
