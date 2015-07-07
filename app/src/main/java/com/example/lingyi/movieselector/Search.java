@@ -69,7 +69,12 @@ public class Search extends ActionBarActivity implements View.OnClickListener{
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getBaseContext(), parent.getItemIdAtPosition(position) + "is selected", Toast.LENGTH_LONG).show();
+                String kind = spinner.getSelectedItem().toString();
+                if (kind.equals("New DVD")) {
+                    new TryToShowDvd().execute();
+                } else if (kind.equals("In Thearters")) {
+                    new TryToShowTheater().execute();
+                }
             }
 
             @Override
@@ -77,6 +82,7 @@ public class Search extends ActionBarActivity implements View.OnClickListener{
 
             }
         });
+//        registerClickCallback();
     }
 
     public void onClick(View v){
@@ -85,8 +91,14 @@ public class Search extends ActionBarActivity implements View.OnClickListener{
                 String keyWord = eText.getText().toString();
                 new TryToSearch().execute();
                 break;
-            case R.id.spinner:
-                break;
+//            case R.id.spinner:
+//                String kind = spinner.getSelectedItem().toString();
+//                if (kind.equals("New DVD")) {
+//
+//                } else if (kind.equals("In Thearters")) {
+//
+//                }
+//                break;
         }
     }
     private void showItem() {
@@ -116,8 +128,8 @@ public class Search extends ActionBarActivity implements View.OnClickListener{
         }
         @Override
         protected void onPostExecute(Void r) {
+            showItem();
             hideDialog();
-            new TryToShowImage().execute();
         }
         private void showDialog() {
             if (!progressDialog.isShowing()) {
@@ -130,12 +142,70 @@ public class Search extends ActionBarActivity implements View.OnClickListener{
             }
         }
     }
-    private class TryToShowImage extends AsyncTask<Void, Void, Void> {
-
+    private class TryToShowDvd extends AsyncTask<Void, Void, Void> {
+        boolean result;
+        private ProgressDialog progressDialog;
+        @Override
+        protected void onPreExecute() {
+            result = false;
+            progressDialog = new ProgressDialog(Search.this);
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage("Finding");
+            showDialog();
+        }
         @Override
         protected Void doInBackground(Void... params) {
-            showItem();
+            RestBean restBean = new RestBean();
+            movieList= restBean.dVD();
             return null;
+        }
+        @Override
+        protected void onPostExecute(Void r) {
+            showItem();
+            hideDialog();
+        }
+        private void showDialog() {
+            if (!progressDialog.isShowing()) {
+                progressDialog.show();
+            }
+        }
+        private void hideDialog() {
+            if (progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
+        }
+    }
+    private class TryToShowTheater extends AsyncTask<Void, Void, Void> {
+        boolean result;
+        private ProgressDialog progressDialog;
+        @Override
+        protected void onPreExecute() {
+            result = false;
+            progressDialog = new ProgressDialog(Search.this);
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage("Finding");
+            showDialog();
+        }
+        @Override
+        protected Void doInBackground(Void... params) {
+            RestBean restBean = new RestBean();
+            movieList= restBean.theaters();
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void r) {
+            showItem();
+            hideDialog();
+        }
+        private void showDialog() {
+            if (!progressDialog.isShowing()) {
+                progressDialog.show();
+            }
+        }
+        private void hideDialog() {
+            if (progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
         }
     }
 
@@ -153,25 +223,25 @@ public class Search extends ActionBarActivity implements View.OnClickListener{
             }
             Movie currentMovie = movieList.get(position);
             ImageView imageView = (ImageView)itemView.findViewById(R.id.imageView1);
-            imageView.setImageBitmap(getBitmapFromURL(currentMovie.getPosters().getThumbnail()));
+            imageView.setImageBitmap(currentMovie.getBitmap());
+            TextView makeText = (TextView)itemView.findViewById(R.id.movieName);
+            makeText.setText(currentMovie.getTitle());
             return itemView;
         }
     }
-    private Bitmap getBitmapFromURL(String src) {
-        try {
-            Log.e("src",src);
-            URL url = new URL(src);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            Log.e("Bitmap","returned");
-            return myBitmap;
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.e("Exception",e.getMessage());
-            return null;
-        }
+//    private void registerClickCallback() {
+//        ListView list = (ListView) findViewById(R.id.mListView);
+//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Movie clickedMovie = movieList.get(position);
+//                Rating rating = new Rating();
+//                rating.setCurrentMovie(clickedMovie);
+//                goToMoviePage();
+//            }
+//        });
+//    }
+    private void goToMoviePage() {
+        startActivity(new Intent(this, Rating.class));
     }
 }
