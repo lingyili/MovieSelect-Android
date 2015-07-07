@@ -1,11 +1,16 @@
 package com.example.lingyi.Fromtomato;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 //import javax.faces.bean.*;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -97,8 +102,28 @@ public class RestBean {
         Gson gson = builder.create();
         MovieResponse response = gson.fromJson(data, MovieResponse.class);
         List<Movie> movies = response.getMovies();
+        for (int i = 0; i < movies.size(); i++) {
+            movies.get(i).setBitmap(getBitmapFromURL(movies.get(i).getPosters().getOriginal()));
+        }
         movieData = movies;
         return movieData;
+    }
+    private Bitmap getBitmapFromURL(String src) {
+        try {
+            Log.e("src", src);
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            Log.e("Bitmap","returned");
+            return myBitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e("Exception",e.getMessage());
+            return null;
+        }
     }
     public Movie getMovieByID(String id) {
         Movie movie = null;
@@ -130,6 +155,9 @@ public class RestBean {
         Gson gson = new Gson();
         MovieResponse response = gson.fromJson(data, MovieResponse.class);
         List<Movie> movies = response.getMovies();
+        for (int i = 0; i < movies.size(); i++) {
+            movies.get(i).setBitmap(getBitmapFromURL(movies.get(i).getPosters().getOriginal()));
+        }
         movieData = movies;
         System.out.println(url);
         return movieData;
@@ -146,6 +174,10 @@ public class RestBean {
         Gson gson = new Gson();
         MovieResponse response = gson.fromJson(data, MovieResponse.class);
         List<Movie> movies = response.getMovies();
+        for (int i = 0; i < movies.size(); i++) {
+            movies.get(i).setBitmap(getBitmapFromURL(movies.get(i).getPosters().getOriginal()));
+            Bitmap.createScaledBitmap(movies.get(i).getBitmap(), 80, 90, true);
+        }
         movieData = movies;
         System.out.println(url);
         return movieData;

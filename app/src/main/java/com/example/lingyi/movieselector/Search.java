@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Parcelable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,7 +52,7 @@ public class Search extends ActionBarActivity implements View.OnClickListener{
     ArrayAdapter<Movie> movieArrayAdapter;
     ListView mListView;
     List<Movie> movieList;
-
+    Movie clickedMovie;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +62,6 @@ public class Search extends ActionBarActivity implements View.OnClickListener{
         eText = (EditText) findViewById(R.id.eText);
         btnSearch = (Button) findViewById(R.id.btnSearch);
         btnSearch.setOnClickListener(this);
-
         spinner = (Spinner) findViewById(R.id.spinner);
         adapter = ArrayAdapter.createFromResource(this,R.array.kind, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -82,23 +82,33 @@ public class Search extends ActionBarActivity implements View.OnClickListener{
 
             }
         });
-//        registerClickCallback();
+        registerClickCallback();
     }
-
+    private void registerClickCallback() {
+        ListView list = (ListView) findViewById(R.id.mListView);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                clickedMovie = movieList.get(position);
+                goToMoviePage();
+            }
+        });
+    }
+    private void goToMoviePage() {
+        Intent intent = new Intent(Search.this, Rating.class);
+        intent.putExtra("movieImage", clickedMovie.getBitmap());
+        intent.putExtra("movieId",clickedMovie.getId());
+        intent.putExtra("movieName", clickedMovie.getTitle());
+        startActivity(intent);
+    }
     public void onClick(View v){
         switch (v.getId()) {
             case R.id.btnSearch:
                 String keyWord = eText.getText().toString();
                 new TryToSearch().execute();
                 break;
-//            case R.id.spinner:
-//                String kind = spinner.getSelectedItem().toString();
-//                if (kind.equals("New DVD")) {
-//
-//                } else if (kind.equals("In Thearters")) {
-//
-//                }
-//                break;
+            case R.id.mListView:
+                break;
         }
     }
     private void showItem() {
@@ -228,20 +238,5 @@ public class Search extends ActionBarActivity implements View.OnClickListener{
             makeText.setText(currentMovie.getTitle());
             return itemView;
         }
-    }
-//    private void registerClickCallback() {
-//        ListView list = (ListView) findViewById(R.id.mListView);
-//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Movie clickedMovie = movieList.get(position);
-//                Rating rating = new Rating();
-//                rating.setCurrentMovie(clickedMovie);
-//                goToMoviePage();
-//            }
-//        });
-//    }
-    private void goToMoviePage() {
-        startActivity(new Intent(this, Rating.class));
     }
 }
