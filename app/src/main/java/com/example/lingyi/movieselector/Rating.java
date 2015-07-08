@@ -10,29 +10,38 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.lingyi.Fromtomato.Movie;
 import com.example.lingyi.Fromtomato.RestBean;
 
 
-public class Rating extends FragmentActivity {
+public class Rating extends FragmentActivity implements RatingBar.OnRatingBarChangeListener {
     Movie passInMovie;
     Button btnSubmit;
     ImageView imageView;
     TextView txtView;
     ArrayAdapter<Movie> movieArrayAdapter;
     Bitmap image;
+    RatingBar ratingBar;
     Movie movie;
-
+    int numstar;
+    User currentUser;
+    UserLocalStore userLocalStore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rating);
         setCurrentMovie();
+        userLocalStore = new UserLocalStore(this);
+        currentUser = userLocalStore.getLoggedInUSer();
+        ((RatingBar) findViewById(R.id.ratingBar))
+                .setOnRatingBarChangeListener(this);
         new TryToShowImage().execute();
 
     }
+
 
    public void setCurrentMovie() {
        passInMovie = new Movie();
@@ -41,6 +50,47 @@ public class Rating extends FragmentActivity {
        passInMovie.setTitle(movieTitle);
        passInMovie.setId(movieId);
    }
+
+    @Override
+    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+        final int numStars = (int) ratingBar.getRating();
+        numstar = numStars;
+        new StoreMyRate().execute();
+
+    }
+    private class StoreMyRate extends AsyncTask<Void, Void, Void> {
+        boolean result;
+        private ProgressDialog progressDialog;
+        @Override
+        protected void onPreExecute() {
+            result = false;
+//            progressDialog = new ProgressDialog(Rating.this);
+//            progressDialog.setCancelable(false);
+//            progressDialog.setMessage("Loading");
+//            showDialog();
+        }
+        @Override
+        protected Void doInBackground(Void... params) {
+            RatingManager ratingManager = new RatingManager();
+            ratingManager.storeRate(numstar, movie.getId(), currentUser.getUsername(), movie.getTitle(), currentUser.getMajor());
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void r) {
+//            showItem();
+//            hideDialog();
+        }
+        private void showDialog() {
+            if (!progressDialog.isShowing()) {
+                progressDialog.show();
+            }
+        }
+        private void hideDialog() {
+            if (progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
+        }
+    }
 
     private class TryToShowImage extends AsyncTask<Void, Void, Void> {
         boolean result;
@@ -83,6 +133,8 @@ public class Rating extends FragmentActivity {
         makeText.setText(movie.getTitle());
         TextView synopsis = (TextView) findViewById(R.id.synopsis);
         synopsis.setText(movie.getSynopsis());
+        TextView year = (TextView) findViewById(R.id.year);
+        year.setText(movie.getYear());
     }
 
 

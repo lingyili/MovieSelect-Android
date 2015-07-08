@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,25 +27,25 @@ public class MainActivity extends Activity implements View.OnClickListener {
     Button btnLogout;
     Button btnSearch;
     Button btnProfile;
-    ListView mListView;
+    Button btnGetRec;
     UserLocalStore userLocalStore;
-    ArrayAdapter<Movie> movieArrayAdapter;
-    List<Movie> movieList;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mListView = (ListView) findViewById(R.id.mListView);
         btnLogout = (Button) findViewById(R.id.btnLogout);
         btnSearch = (Button) findViewById(R.id.btnSearch);
         btnProfile = (Button) findViewById(R.id.btnProfile);
+        btnGetRec = (Button) findViewById(R.id.btnGetRec);
         btnSearch.setOnClickListener(this);
         btnLogout.setOnClickListener(this);
         btnProfile.setOnClickListener(this);
+        btnGetRec.setOnClickListener(this);
         userLocalStore = new UserLocalStore(this);
 
     }
-
 
     @Override
     public void onClick(View v) {
@@ -59,51 +60,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.btnSearch:
                 startActivity((new Intent(this, Search.class)));
+                break;
+            case R.id.btnGetRec:
+                startActivity(new Intent(this, GetYourRecommendation.class));
         }
     }
 
-    private class TryToShowTheater extends AsyncTask<Void, Void, Void> {
-        boolean result;
-        private ProgressDialog progressDialog;
-        @Override
-        protected void onPreExecute() {
-            result = false;
-        }
-        @Override
-        protected Void doInBackground(Void... params) {
-            RestBean restBean = new RestBean();
-//            movieList= restBean.getMovieByID();
-            return null;
-        }
-        @Override
-        protected void onPostExecute(Void r) {
-            showItem();
-        }
-    }
-    private class MyListAdapter extends ArrayAdapter<Movie> {
-        public MyListAdapter() {
-            super(MainActivity.this, R.layout.item_view, movieList);
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View itemView = convertView;
-            if (itemView == null) {
-                itemView = getLayoutInflater().inflate(R.layout.item_view, parent, false);
-
-            }
-            Movie currentMovie = movieList.get(position);
-            ImageView imageView = (ImageView)itemView.findViewById(R.id.imageView1);
-            imageView.setImageBitmap(currentMovie.getBitmap());
-            TextView makeText = (TextView)itemView.findViewById(R.id.movieName);
-            makeText.setText(currentMovie.getTitle());
-            return itemView;
-        }
-    }
-    private void showItem() {
-        movieArrayAdapter = new MyListAdapter();
-        mListView = (ListView) findViewById(R.id.mListView);
-        mListView.setAdapter(movieArrayAdapter);
-
-    }
 }

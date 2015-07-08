@@ -120,9 +120,10 @@ public class MovieBean {
      * Gets list of recommended movies and makes an api call for each
      * @return toReturn the list of recommended movies
      */
-    public ArrayList<Movie> getRecommendations() {
+    public ArrayList<Movie> getRecommendations(String major) {
         ArrayList<Movie> toReturn = new ArrayList<Movie>();
-        ArrayList<MyRating> list = ratingManager.getRecommendation(userManager.getUser().getMajor());
+        restBean = new RestBean();
+        ArrayList<MyRating> list = ratingManager.getRecommendation(major);
         for (MyRating e : list) {
             toReturn.add(restBean.getMovieByID(e.getMovieID()));
         }

@@ -59,7 +59,8 @@ public class Login extends ActionBarActivity implements View.OnClickListener{
     private void logUserIn(User returnedUser) {
         userLocalStore.storeUserData(returnedUser);
         userLocalStore.setUserLoggedIn(true);
-        startActivity(new Intent(this, MainActivity.class));
+        Intent intent = new Intent(Login.this, MainActivity.class);
+        startActivity(intent);
     }
 
 
@@ -94,6 +95,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener{
                 //result wasnot added
             } else {
                 logUserIn(result);
+
             }
         }
         private void showDialog() {

@@ -27,14 +27,10 @@
             android:text="@string/Logout"
             android:onClick="logout" />
     </LinearLayout>
-    <ListView
-        android:id="@+id/mListView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="40dp"
-        android:cacheColorHint="@android:color/transparent"
-        android:divider="@android:color/white"
-        android:dividerHeight="2dp" >
-    </ListView>
+    <Button
+        android:id="@+id/btnGetRec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Your Recommendation"
+        android:onClick="profile" />
 </LinearLayout>

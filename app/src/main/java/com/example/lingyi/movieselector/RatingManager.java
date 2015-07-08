@@ -76,7 +76,7 @@ public class RatingManager {
     public void  storeRate(int score, String movieID, String username, String movieTitle, String major) {
         Connection con = Database.makeConnection();
         try {
-            String query = "INSERT INTO comment(comment, username, movieID, movie, major)" + "values(?, ?, ?, ?, ?)";
+            String query = "INSERT INTO comment(score, username, movieID, movie, major)" + "values(?, ?, ?, ?, ?)";
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setInt(1, score);
             preparedStmt.setString(2, username);
