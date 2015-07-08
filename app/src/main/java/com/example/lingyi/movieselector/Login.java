@@ -2,6 +2,7 @@ package com.example.lingyi.movieselector;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
@@ -92,7 +93,11 @@ public class Login extends ActionBarActivity implements View.OnClickListener{
         protected void onPostExecute(Void r) {
             hideDialog();
             if (result == null) {
-                //result wasnot added
+                Context context = getApplicationContext();
+                CharSequence text = "Wrong Username or Password";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
             } else {
                 logUserIn(result);
 

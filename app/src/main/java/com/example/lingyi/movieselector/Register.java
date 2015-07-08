@@ -2,6 +2,7 @@ package com.example.lingyi.movieselector;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
@@ -49,12 +50,10 @@ public class Register extends ActionBarActivity implements View.OnClickListener{
         etMajor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getBaseContext(), parent.getItemIdAtPosition(position) + "is selected", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
@@ -107,7 +106,7 @@ public class Register extends ActionBarActivity implements View.OnClickListener{
             result = false;
             progressDialog = new ProgressDialog(Register.this);
             progressDialog.setCancelable(false);
-            progressDialog.setMessage("logging in");
+            progressDialog.setMessage("Submitting");
             showDialog();
         }
 
@@ -122,9 +121,14 @@ public class Register extends ActionBarActivity implements View.OnClickListener{
         @Override
         protected void onPostExecute(Void r) {
             hideDialog();
-            if (result == false) {
+            if (result == true) {
                 goToLogin();
             } else {
+                Context context = getApplicationContext();
+                CharSequence text = "User is already exist";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
             }
         }
         private void showDialog() {
