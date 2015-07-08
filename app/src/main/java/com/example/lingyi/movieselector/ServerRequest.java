@@ -248,21 +248,21 @@ public class ServerRequest{
      * update the user's profile into database
      * @return profile
      */
-    public String updateProfile() {
-        if (currUser.getPassword() != null && currUser.getPassword().length() >= 6) {
-            updatePassword(currUser);
+    public String updateProfile(User myUser) {
+        if (myUser.getPassword() != null && myUser.getPassword().length() >= 6) {
+            updatePassword(myUser);
         }
-        if (currUser.getFirstName() != null) {
-            updateFirstName(currUser);
+        if (myUser.getFirstName() != null) {
+            updateFirstName(myUser);
         }
-        if (currUser.getLastName() != null) {
-            updateLastName(currUser);
+        if (myUser.getLastName() != null) {
+            updateLastName(myUser);
         }
-        if (currUser.getEmail() != null) {
-            updateEmail(currUser);
+        if (myUser.getEmail() != null) {
+            updateEmail(myUser);
         }
-        if (currUser.getMajor() != null) {
-            updateMajor(currUser);
+        if (!myUser.getMajor().equals("Select")) {
+            updateMajor(myUser);
         }
         return "profile";
     }

@@ -25,6 +25,7 @@
     <string name="Search">Search</string>
     <string name="movieName">movieName</string>
     <string-array name="major_names">
+        <item>Select</item>
         <item>CS</item>
         <item>BME</item>
         <item>ME</item>
@@ -37,6 +38,7 @@
         <item>Select</item>
         <item>New DVD</item>
         <item>In Thearters</item>
+        <item>You May Like</item>
     </string-array>
     <string name="title_activity_rating">Rating</string>
     <string name="Comment">Comments</string>
@@ -44,4 +46,6 @@
     <string name="title_activity_get_your_recommendation">GetYourRecommendation</string>
     <string name="title_activity_comment">Comment</string>
     <string name="CommentIt">Comment it!</string>
+    <string name="title_activity_edit">Edit</string>
+    <string name="Submit">Submit</string>
 </resources>

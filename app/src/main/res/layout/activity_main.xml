@@ -27,10 +27,4 @@
             android:text="@string/Logout"
             android:onClick="logout" />
     </LinearLayout>
-    <Button
-        android:id="@+id/btnGetRec"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Get Your Recommendation"
-        android:onClick="profile" />
 </LinearLayout>

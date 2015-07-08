@@ -53,11 +53,15 @@ public class Search extends ActionBarActivity implements View.OnClickListener{
     ListView mListView;
     List<Movie> movieList;
     Movie clickedMovie;
+    UserLocalStore userLocalStore;
+    User currentUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        userLocalStore = new UserLocalStore(this);
+        currentUser = userLocalStore.getLoggedInUSer();
         mListView = (ListView) findViewById(R.id.mListView);
         eText = (EditText) findViewById(R.id.eText);
         btnSearch = (Button) findViewById(R.id.btnSearch);
@@ -74,6 +78,8 @@ public class Search extends ActionBarActivity implements View.OnClickListener{
                     new TryToShowDvd().execute();
                 } else if (kind.equals("In Thearters")) {
                     new TryToShowTheater().execute();
+                } else if (kind.equals("You May Like")) {
+                    new TryToShowLiked().execute();
                 }
             }
 
@@ -218,6 +224,42 @@ public class Search extends ActionBarActivity implements View.OnClickListener{
             }
         }
     }
+
+    private class TryToShowLiked extends AsyncTask<Void, Void, Void> {
+        boolean result;
+        private ProgressDialog progressDialog;
+        @Override
+        protected void onPreExecute() {
+            result = false;
+            progressDialog = new ProgressDialog(Search.this);
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage("Finding");
+            showDialog();
+        }
+        @Override
+        protected Void doInBackground(Void... params) {
+            MovieBean movieBean = new MovieBean();
+            movieList= movieBean.getRecommendations(currentUser.getMajor());
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void r) {
+            showItem();
+            hideDialog();
+        }
+        private void showDialog() {
+            if (!progressDialog.isShowing()) {
+                progressDialog.show();
+            }
+        }
+        private void hideDialog() {
+            if (progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
+        }
+    }
+
+
 
     private class MyListAdapter extends ArrayAdapter<Movie> {
         public MyListAdapter() {

@@ -1,6 +1,5 @@
 package com.example.lingyi.movieselector;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -17,8 +16,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 
-public class Register extends ActionBarActivity implements View.OnClickListener{
-    Button btnRegister;
+public class Edit extends ActionBarActivity implements View.OnClickListener{
+    Button btnSubmit;
     Button btnCancel;
     EditText etFirstName;
     EditText etLastName;
@@ -26,13 +25,13 @@ public class Register extends ActionBarActivity implements View.OnClickListener{
     EditText etUsername;
     EditText etPassword;
     Spinner etMajor;
+    User currentUser;
+    UserLocalStore userLocalStore;
     ArrayAdapter<CharSequence> adapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-
+        setContentView(R.layout.activity_edit);
         etFirstName = (EditText) findViewById(R.id.etFirstName);
         etLastName = (EditText) findViewById(R.id.etLastName);
         etEmail = (EditText) findViewById(R.id.etEmail);
@@ -42,9 +41,9 @@ public class Register extends ActionBarActivity implements View.OnClickListener{
         adapter = ArrayAdapter.createFromResource(this,R.array.major_names, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         etMajor.setAdapter(adapter);
-        btnRegister = (Button) findViewById(R.id.btnRegister);
+        btnSubmit = (Button) findViewById(R.id.btnSubmit);
         btnCancel = (Button) findViewById(R.id.btnCancel);
-        btnRegister.setOnClickListener(this);
+        btnSubmit.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
         etMajor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -57,39 +56,31 @@ public class Register extends ActionBarActivity implements View.OnClickListener{
 
             }
         });
+        userLocalStore = new UserLocalStore(this);
+    }
+    protected void onStart() {
+        super.onStart();
+        displayUSerDetails();
 
     }
-
+    private void displayUSerDetails() {
+        currentUser = userLocalStore.getLoggedInUSer();
+        etFirstName.setText(currentUser.getFirstName());
+        etLastName.setText(currentUser.getLastName());
+        etEmail.setText(currentUser.getEmail());
+        etUsername.setText(currentUser.getUsername());
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnRegister:
-//                String FirstName = etFirstName.getText().toString();
-//                String LastName = etLastName.getText().toString();
-//                String username = etUsername.getText().toString();
-//                String password = etPassword.getText().toString();
-//                String email = etEmail.getText().toString();
-//                String major = etMajor.getSelectedItem().toString();
-//                User user = new User(username, password, FirstName, LastName, email, major);
-                new TryToRegister().execute();
+            case R.id.btnSubmit:
+                new TryToEdit().execute();
                 break;
             case R.id.btnCancel:
-                startActivity(new Intent(this, welcome.class));
+                startActivity(new Intent(this, Profile.class));
         }
     }
-
-//    private void registerUser(User user) {
-//        ServerRequest serverRequest = new ServerRequest();
-//        if (serverRequest.addUser(user)) {
-//            startActivity(new Intent(this, Login.class));
-//        }
-//    }
-
-    private void goToLogin() {
-        startActivity(new Intent(this, Login.class));
-    }
-
-    private class TryToRegister extends AsyncTask<Void, Void, Void> {
+    private class TryToEdit extends AsyncTask<Void, Void, Void> {
         String username, password;
         String FirstName, LastName, email, major;
         private ProgressDialog progressDialog;
@@ -105,17 +96,21 @@ public class Register extends ActionBarActivity implements View.OnClickListener{
             email = etEmail.getText().toString();
             major = etMajor.getSelectedItem().toString();
             result = false;
-            progressDialog = new ProgressDialog(Register.this);
+            progressDialog = new ProgressDialog(Edit.this);
             progressDialog.setCancelable(false);
-            progressDialog.setMessage("logging in");
+            progressDialog.setMessage("submitting");
             showDialog();
         }
 
         @Override
         protected Void doInBackground(Void... params) {
             ServerRequest serverRequest = new ServerRequest();
+            if (major.equals("Select")) {
+                major = currentUser.getMajor();
+            }
             user = new User(username, password, FirstName, LastName, email, major);
-            result = serverRequest.addUser(user);
+            serverRequest.updateProfile(user);
+            userLocalStore.storeUserData(user);
             return null;
         }
 
@@ -123,7 +118,7 @@ public class Register extends ActionBarActivity implements View.OnClickListener{
         protected void onPostExecute(Void r) {
             hideDialog();
             if (result == false) {
-                goToLogin();
+                goToEdit();
             } else {
             }
         }
@@ -138,5 +133,9 @@ public class Register extends ActionBarActivity implements View.OnClickListener{
             }
         }
 
+    }
+
+    private void goToEdit() {
+        startActivity(new Intent(this, Profile.class));
     }
 }

@@ -27,7 +27,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
     Button btnLogout;
     Button btnSearch;
     Button btnProfile;
-    Button btnGetRec;
     UserLocalStore userLocalStore;
 
 
@@ -38,11 +37,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         btnLogout = (Button) findViewById(R.id.btnLogout);
         btnSearch = (Button) findViewById(R.id.btnSearch);
         btnProfile = (Button) findViewById(R.id.btnProfile);
-        btnGetRec = (Button) findViewById(R.id.btnGetRec);
         btnSearch.setOnClickListener(this);
         btnLogout.setOnClickListener(this);
         btnProfile.setOnClickListener(this);
-        btnGetRec.setOnClickListener(this);
         userLocalStore = new UserLocalStore(this);
 
     }
@@ -61,8 +58,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
             case R.id.btnSearch:
                 startActivity((new Intent(this, Search.class)));
                 break;
-            case R.id.btnGetRec:
-                startActivity(new Intent(this, GetYourRecommendation.class));
         }
     }
 

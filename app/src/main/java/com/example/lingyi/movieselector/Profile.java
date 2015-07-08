@@ -8,28 +8,33 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class Profile extends ActionBarActivity implements View.OnClickListener {
 
     Button btnBack;
-    EditText etFirstName;
-    EditText etLastName;
-    EditText etEmail;
-    EditText etUsername;
+    Button btnEdit;
+    TextView etFirstName;
+    TextView etLastName;
+    TextView etEmail;
+    TextView etUsername;
+    TextView etMajor;
     UserLocalStore userLocalStore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        etFirstName = (EditText) findViewById(R.id.etFirstName);
-        etLastName = (EditText) findViewById(R.id.etLastName);
-        etEmail = (EditText) findViewById(R.id.etEmail);
-        etUsername = (EditText) findViewById(R.id.etUsername);
-//        etMajor = (EditText) findViewById(R.id.etMajor);
+        etFirstName = (TextView) findViewById(R.id.etFirstName);
+        etLastName = (TextView) findViewById(R.id.etLastName);
+        etEmail = (TextView) findViewById(R.id.etEmail);
+        etUsername = (TextView) findViewById(R.id.etUsername);
+        etMajor = (TextView) findViewById(R.id.etMajor);
         btnBack = (Button) findViewById(R.id.btnBack);
         btnBack.setOnClickListener(this);
+        btnEdit = (Button) findViewById(R.id.btnEdit);
+        btnEdit.setOnClickListener(this);
         userLocalStore = new UserLocalStore(this);
     }
 
@@ -50,7 +55,7 @@ public class Profile extends ActionBarActivity implements View.OnClickListener {
         etLastName.setText(user.getLastName());
         etEmail.setText(user.getEmail());
         etUsername.setText(user.getUsername());
-//        etMajor.setText(user.getMajor());
+        etMajor.setText(user.getMajor());
     }
 
 
@@ -59,6 +64,9 @@ public class Profile extends ActionBarActivity implements View.OnClickListener {
         switch(v.getId()) {
             case R.id.btnBack:
                 startActivity(new Intent(this, MainActivity.class));
+                break;
+            case R.id.btnEdit:
+                startActivity(new Intent(this, Edit.class));
                 break;
         }
     }

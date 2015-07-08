@@ -1,110 +1,92 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="20dp"
     android:layout_margin="10dp"
     android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Username" />
-    <TextView
+    <EditText
         android:id="@+id/etUsername"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_marginLeft="30dp"
+        android:layout_width="match_parent"
         android:inputType="text"
         android:singleLine="true"/>
-    </LinearLayout>
 
-    <LinearLayout
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="30dp">
+        android:text="@string/Password"/>
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:inputType="textPassword"
+        android:singleLine="true"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/FirstName"/>
-    <TextView
+    <EditText
         android:id="@+id/etFirstName"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_marginLeft="30dp"
+        android:layout_width="match_parent"
         android:inputType="textPersonName"
         android:singleLine="true"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="30dp">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/LastName"/>
-    <TextView
+    <EditText
         android:id="@+id/etLastName"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_marginLeft="30dp"
+        android:layout_width="match_parent"
         android:inputType="textPersonName"
         android:singleLine="true"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="30dp">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Email"/>
-    <TextView
+    <EditText
         android:id="@+id/etEmail"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_marginLeft="30dp"
+        android:layout_width="match_parent"
         android:inputType="textEmailAddress"
         android:singleLine="true"/>
-    </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="30dp">
+        android:layout_height="wrap_content">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Major" />
-        <TextView
+        <Spinner
             android:id="@+id/etMajor"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:inputType="text"
-            android:singleLine="true"/>
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:paddingTop="50dp">
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Submit"
+        android:onClick="register"
+        android:layout_gravity="center_horizontal" />
 
     <Button
-        style="?android:attr/buttonStyleSmall"
+        android:id="@+id/btnCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit"
-        android:id="@+id/btnEdit"
+        android:text="@string/Cancel"
+        android:onClick="cancel"
         android:layout_gravity="center_horizontal" />
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Back"
-        android:layout_gravity="center_horizontal"/>
-</LinearLayout>
 
 </LinearLayout>
