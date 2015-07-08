@@ -60,6 +60,10 @@
             android:name=".GetYourRecommendation"
             android:label="@string/title_activity_get_your_recommendation" >
         </activity>
+        <activity
+            android:name=".Comment"
+            android:label="@string/title_activity_comment" >
+        </activity>
     </application>
 
 </manifest>

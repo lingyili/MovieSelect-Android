@@ -42,4 +42,6 @@
     <string name="Comment">Comments</string>
     <string name="Synopsis">Synopsis</string>
     <string name="title_activity_get_your_recommendation">GetYourRecommendation</string>
+    <string name="title_activity_comment">Comment</string>
+    <string name="CommentIt">Comment it!</string>
 </resources>

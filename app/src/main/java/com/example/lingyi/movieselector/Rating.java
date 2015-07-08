@@ -7,8 +7,10 @@ import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -17,9 +19,9 @@ import com.example.lingyi.Fromtomato.Movie;
 import com.example.lingyi.Fromtomato.RestBean;
 
 
-public class Rating extends FragmentActivity implements RatingBar.OnRatingBarChangeListener {
+public class Rating extends FragmentActivity implements RatingBar.OnRatingBarChangeListener, View.OnClickListener {
     Movie passInMovie;
-    Button btnSubmit;
+    Button btnComment;
     ImageView imageView;
     TextView txtView;
     ArrayAdapter<Movie> movieArrayAdapter;
@@ -40,6 +42,8 @@ public class Rating extends FragmentActivity implements RatingBar.OnRatingBarCha
                 .setOnRatingBarChangeListener(this);
         new TryToShowImage().execute();
 
+        btnComment = (Button) findViewById(R.id.btnComment);
+        btnComment.setOnClickListener(this);
     }
 
 
@@ -58,16 +62,29 @@ public class Rating extends FragmentActivity implements RatingBar.OnRatingBarCha
         new StoreMyRate().execute();
 
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnComment:
+                Intent intent = new Intent(Rating.this, Comment.class);
+                intent.putExtra("movieName", movie.getTitle());
+                intent.putExtra("movieId", movie.getId());
+                startActivity(intent);
+                break;
+        }
+    }
+
     private class StoreMyRate extends AsyncTask<Void, Void, Void> {
         boolean result;
         private ProgressDialog progressDialog;
         @Override
         protected void onPreExecute() {
             result = false;
-//            progressDialog = new ProgressDialog(Rating.this);
-//            progressDialog.setCancelable(false);
-//            progressDialog.setMessage("Loading");
-//            showDialog();
+            progressDialog = new ProgressDialog(Rating.this);
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage("Storing score");
+            showDialog();
         }
         @Override
         protected Void doInBackground(Void... params) {
@@ -78,7 +95,7 @@ public class Rating extends FragmentActivity implements RatingBar.OnRatingBarCha
         @Override
         protected void onPostExecute(Void r) {
 //            showItem();
-//            hideDialog();
+            hideDialog();
         }
         private void showDialog() {
             if (!progressDialog.isShowing()) {

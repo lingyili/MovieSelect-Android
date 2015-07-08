@@ -144,7 +144,9 @@ public class RatingManager {
             Statement state = con.createStatement();
             ResultSet result = state.executeQuery("SELECT movieID, comment FROM comment WHERE movieID = " + movieID);
             while (result.next()) {
-                commentList.add(result.getString("comment"));
+                if (result.getString("comment") != null) {
+                    commentList.add(result.getString("comment"));
+                }
             }
         } catch (Exception e){
             e.getMessage();
