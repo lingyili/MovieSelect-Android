@@ -55,11 +55,20 @@ public class Search extends ActionBarActivity implements View.OnClickListener{
     Movie clickedMovie;
     UserLocalStore userLocalStore;
     User currentUser;
+    Button btnHome;
+    Button btnProfile;
+    Button btnLogout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        btnHome = (Button) findViewById(R.id.btnMain);
+        btnProfile = (Button) findViewById(R.id.btnProfile);
+        btnLogout = (Button) findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(this);
+        btnProfile.setOnClickListener(this);
+        btnHome.setOnClickListener(this);
         userLocalStore = new UserLocalStore(this);
         currentUser = userLocalStore.getLoggedInUSer();
         mListView = (ListView) findViewById(R.id.mListView);
@@ -114,6 +123,17 @@ public class Search extends ActionBarActivity implements View.OnClickListener{
                 new TryToSearch().execute();
                 break;
             case R.id.mListView:
+                break;
+            case R.id.btnMain:
+                startActivity(new Intent(this, MainActivity.class));
+                break;
+            case R.id.btnProfile:
+                startActivity(new Intent(this, Profile.class));
+                break;
+            case R.id.btnLogout:
+                userLocalStore.clearUserData();
+                userLocalStore.setUserLoggedIn(false);
+                startActivity(new Intent(this, welcome.class));
                 break;
         }
     }

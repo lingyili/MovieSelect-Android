@@ -37,11 +37,35 @@
         android:id="@+id/mListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="45dp"
         android:cacheColorHint="@android:color/transparent"
         android:divider="@android:color/white"
         android:dividerHeight="2dp" >
     </ListView>
 </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="445dp">
+        <Button
+            android:id="@+id/btnProfile"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/MyProfile"
+            android:onClick="profile" />
+        <Button
+            android:id="@+id/btnMain"
+            android:layout_width="142dp"
+            android:layout_height="wrap_content"
+            android:text="@string/Home"
+            android:onClick="movie" />
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Logout"
+            android:onClick="logout" />
+
+    </LinearLayout>
 </RelativeLayout>
 

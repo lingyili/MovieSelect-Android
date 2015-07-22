@@ -76,6 +76,31 @@ public class ServerRequest{
         }
         return false;
     }
+    public User searchUserforAdmin(User user) {
+        Connection con = Database.makeConnection();
+        try {
+            Statement state = con.createStatement();
+            ResultSet result = state.executeQuery("SELECT * FROM User");
+            while (result.next()) {
+                if (result.getString("username").equals(user.getUsername())) {
+                    String ID = result.getString("username");
+                    String passWord = result.getString("password");
+                    User newUser = new User(ID, passWord);
+                    newUser.setEmail(result.getString("email"));
+                    newUser.setFirstName(result.getString("firstname"));
+                    newUser.setLastName(result.getString("lastname"));
+                    newUser.setMajor(result.getString("major"));
+                    newUser.setStatus(result.getString("status"));
+                    return newUser;
+                }
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        } finally {
+            Database.makeClosed(con);
+        }
+        return null;
+    }
     public User searchUser(User user) {
         Connection con = Database.makeConnection();
         try {

@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="300dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:theme="@style/AlertDialog.AppCompat.Light"
+    android:background="#fbff4f">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -11,18 +13,20 @@
         android:layout_gravity="center_horizontal">
         <Button
             android:text="@string/Login"
+            android:shadowColor="#edeecb"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btnLoginPage"
-            android:layout_gravity="center_horizontal"></Button>
+            android:background="#fff6d4ff"></Button>
         <Button
             android:text="@string/Register"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btnRegisterPage"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:background="#fff6d4ff" />
     </LinearLayout>
 
 </LinearLayout>
