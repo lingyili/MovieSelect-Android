@@ -2,15 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="300dp"
     android:orientation="vertical"
     android:theme="@style/AlertDialog.AppCompat.Light"
-    android:background="#fbff4f">
+    android:background="@drawable/jacket_strong">
+    <!--android:background="#fbff4f">-->
+
+
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Welcome"
+        android:textSize="50dp"
+        android:gravity="center"/>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="30dp"
+        android:gravity="bottom|center">
+
         <Button
             android:text="@string/Login"
             android:shadowColor="#edeecb"
@@ -18,15 +30,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btnLoginPage"
-            android:background="#fff6d4ff"></Button>
+            android:background="#fff6d4ff"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="70dp"/>
+
         <Button
             android:text="@string/Register"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btnRegisterPage"
-            android:layout_gravity="center_horizontal"
-            android:background="#fff6d4ff" />
+            android:layout_gravity="bottom"
+            android:background="#fff6d4ff"
+            android:layout_alignParentBottom="true"/>
     </LinearLayout>
-
 </LinearLayout>

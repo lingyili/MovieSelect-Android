@@ -3,7 +3,9 @@
     android:layout_height="match_parent"
     android:paddingTop="20dp"
     android:layout_margin="10dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#fbff4f">
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -89,5 +91,9 @@
         android:onClick="cancel"
         android:layout_gravity="center_horizontal" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo"/>
 
 </LinearLayout>

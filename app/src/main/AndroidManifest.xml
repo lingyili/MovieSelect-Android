@@ -27,7 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity android:name=".activity" />-->
+        <!-- <activity android:name=".activity" /> -->
         <activity
             android:name=".Register"
             android:label="@string/title_activity_register" />
@@ -76,6 +76,10 @@
             android:name=".UserPage"
             android:label="@string/title_activity_user_page" >
         </activity>
+        <!--<activity-->
+            <!--android:name=".welcome"-->
+            <!--android:label="welcome">-->
+        <!--</activity>-->
     </application>
 
 </manifest>

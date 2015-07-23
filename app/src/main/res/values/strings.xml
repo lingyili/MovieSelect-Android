@@ -55,4 +55,5 @@
     <string name="title_activity_user_page">UserPage</string>
     <string name="status">Status</string>
     <string name="profile">Profile</string>
+    <string name="title_activity_animation_page">animationPage</string>
 </resources>
